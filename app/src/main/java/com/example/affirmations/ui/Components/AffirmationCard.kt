@@ -31,7 +31,11 @@ import com.example.affirmations.ui.Components.DescriptionDisplayer
 import com.example.affirmations.ui.Components.ExpandButton
 
 @Composable
-fun AffirmationCard(affirmation: Affirmation, modifier: Modifier = Modifier) {
+fun AffirmationCard(
+    affirmation: Affirmation,
+    modifier: Modifier = Modifier,
+    openDetail : ((Affirmation)->Unit)? = null
+) {
     val isExpanded = remember { mutableStateOf(false)}
     Card(
         elevation = 8.dp,
@@ -83,7 +87,8 @@ fun AffirmationCard(affirmation: Affirmation, modifier: Modifier = Modifier) {
             if (isExpanded.value) {
                 DescriptionDisplayer(
                     affirmation,
-                    modifier
+                    modifier,
+                    openDetail
                 )
             }
         }

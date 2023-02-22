@@ -2,6 +2,7 @@ package com.example.affirmations.ui.Components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -13,7 +14,11 @@ import androidx.compose.ui.unit.sp
 import com.example.affirmations.model.Affirmation
 
 @Composable
-fun DescriptionDisplayer(affirmation: Affirmation, modifier : Modifier = Modifier){
+fun DescriptionDisplayer(
+    affirmation: Affirmation,
+    modifier : Modifier = Modifier,
+    openDetail : ((Affirmation)->Unit)? = null
+){
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -42,5 +47,24 @@ fun DescriptionDisplayer(affirmation: Affirmation, modifier : Modifier = Modifie
             Spacer(modifier = modifier.padding(8.dp))
         }
         Spacer(modifier = modifier.padding(top = 12.dp))
+        Row(
+            horizontalArrangement = Arrangement.End,
+            modifier = modifier.fillMaxWidth()
+        ){
+            Button(
+                modifier = modifier.padding(bottom = 8.dp, end = 12.dp),
+                onClick = {
+                    if(openDetail != null)
+                        openDetail(affirmation)
+                }
+            ) {
+                Text(
+                    text = stringResource(id = com.example.affirmations.R.string.detail_fragment),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Medium,
+                    modifier = modifier
+                )
+            }
+        }
     }
 }

@@ -39,4 +39,5 @@
     <string name="change_theme">Theme</string>
     <string name="expand_button_content_description">Expand Button</string>
     <string name="description_title">Description:</string>
+    <string name="detail_fragment">See more</string>
 </resources>
