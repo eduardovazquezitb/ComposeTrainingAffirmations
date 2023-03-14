@@ -1,5 +1,6 @@
-package com.example.affirmations.ui.Components
+package com.example.affirmations.ui.components
 
+import android.content.Context
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,7 +15,6 @@ import com.example.affirmations.model.Affirmation
 fun AffirmationList(
     affirmationList: List<Affirmation>,
     modifier: Modifier = Modifier,
-    openDetail : ((Affirmation)->Unit)? = null
 ) {
     // TODO 3. Wrap affirmation card in a lazy column
     LazyColumn(){
@@ -23,7 +23,6 @@ fun AffirmationList(
             AffirmationCard(
                 affirmation = item,
                 modifier = modifier,
-                openDetail
             )
         } )
     }

@@ -15,20 +15,43 @@
  */
 package com.example.affirmations
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.affirmations.ui.Components.App
+import com.example.affirmations.data.Datasource
+import com.example.affirmations.ui.components.AffirmationList
+import com.example.affirmations.ui.components.AppScaffold
+import com.example.affirmations.ui.navigation.MainNavigator
+import com.example.affirmations.ui.viewmodel.MainViewModel
 
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     this.setContent {
-      // TODO 5. Show screen
-      App()
+
+      val viewModel = MainViewModel()
+      val affirmationList by viewModel.uiState.collectAsState()
+
+      AppScaffold(
+        activityName = stringResource(id = R.string.app_name)
+      ){
+        AffirmationList(
+          affirmationList = affirmationList
+        )
+      }
     }
+  }
+
+  fun goToDetail(affirmationId: Int){
+    val intent = Intent(this, DetailActivity::class.java)
+    intent.putExtra("affirmation", affirmationId)
+    this.startActivity(intent)
   }
 }
 
@@ -36,5 +59,11 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun AffirmationCardPreview() {
   // TODO 2. Preview your card
-  App()
+  AppScaffold(
+    activityName = stringResource(id = R.string.app_name)
+  ){
+    AffirmationList(
+      affirmationList = Datasource().loadAffirmations()
+    )
+  }
 }
