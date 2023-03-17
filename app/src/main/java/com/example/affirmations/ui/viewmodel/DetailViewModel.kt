@@ -1,6 +1,8 @@
 package com.example.affirmations.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.example.affirmations.R
 import com.example.affirmations.data.Datasource
 import com.example.affirmations.model.Affirmation
 import com.example.affirmations.model.DetailUiState
@@ -13,13 +15,13 @@ class DetailViewModel : ViewModel() {
     private val _uiState = MutableStateFlow<DetailUiState>(
         DetailUiState(
             affirmation = Affirmation(
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
+                1,
+                R.string.affirmation1,
+                R.drawable.image1,
+                R.string.description1,
+                R.string.to1,
+                R.string.subject1,
+                R.string.phone1
             ),
             isLoading = true,
             isError = false
@@ -29,7 +31,8 @@ class DetailViewModel : ViewModel() {
     val uiState: StateFlow<DetailUiState> = _uiState.asStateFlow()
 
     fun loadAffirmation(id: Int) {
-        val affirmation = Datasource().loadAffirmation(id)
+        val affirmation : Affirmation? = Datasource().loadAffirmation(id)
+        Log.i(null, affirmation.toString())
         if(affirmation != null)
             _uiState.update {
                 DetailUiState(
