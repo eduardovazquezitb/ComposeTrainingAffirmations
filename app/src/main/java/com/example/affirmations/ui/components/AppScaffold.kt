@@ -17,6 +17,8 @@ import com.example.affirmations.ui.theme.AffirmationsTheme
 fun AppScaffold(
     activityName: String,
     onGoBackButton: (() -> Unit)? = null,
+    isLoading: Boolean,
+    isError: Boolean,
     children: @Composable (modifier: Modifier) -> Unit,
 ) {
     val darkThemeState = remember { mutableStateOf(false) }
@@ -30,12 +32,17 @@ fun AppScaffold(
                 onThemeClick = { darkThemeState.value = ! darkThemeState.value}
             ) },
         ) { padding ->
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.secondary)
-            ) {
-                    children(modifier=Modifier.padding(padding))
-            }
+            if(isLoading)
+                Loadingcomponent(modifier = Modifier.padding(padding))
+            else if (isError)
+                ErrorComponent(modifier = Modifier.padding(padding))
+            else
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.secondary)
+                ) {
+                        children(modifier=Modifier.padding(padding))
+                }
         }
     }
 }

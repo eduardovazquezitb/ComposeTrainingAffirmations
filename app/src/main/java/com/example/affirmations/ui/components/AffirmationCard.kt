@@ -1,6 +1,5 @@
 package com.example.affirmations
 
-import android.content.Context
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
@@ -13,8 +12,6 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,9 +28,10 @@ import com.example.affirmations.ui.components.ExpandButton
 @Composable
 fun AffirmationCard(
     affirmation: Affirmation,
+    isExpanded: Boolean,
+    toggleAffirmation: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val isExpanded = remember { mutableStateOf(false)}
     Card(
         elevation = 8.dp,
         shape = RoundedCornerShape(15.dp),
@@ -76,12 +74,12 @@ fun AffirmationCard(
                 Spacer(modifier = modifier.padding(4.dp))
                 ExpandButton(
                     modifier.size(50.dp),
-                    onClick = { isExpanded.value = !isExpanded.value },
-                    isExpanded = isExpanded.value
+                    onClick = { toggleAffirmation() },
+                    isExpanded = isExpanded
                 )
                 Spacer(modifier = modifier.padding(4.dp))
             }
-            if (isExpanded.value) {
+            if (isExpanded) {
                 DescriptionDisplayer(
                     affirmation,
                     modifier,

@@ -23,5 +23,8 @@ data class Affirmation(
     val id: Int,
     @StringRes val stringResourceId: Int,
     @DrawableRes val imageResourceId: Int,
-    @StringRes val descriptionResourceId: Int
+    @StringRes val descriptionResourceId: Int,
+    @StringRes val toResourceId: Int,
+    @StringRes val subjectResourceId: Int,
+    @StringRes val phoneResourceId: Int
 )

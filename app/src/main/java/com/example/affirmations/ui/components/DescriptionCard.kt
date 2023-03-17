@@ -1,7 +1,6 @@
 package com.example.affirmations.ui.components
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -11,10 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.affirmations.R
 import com.example.affirmations.model.Affirmation
 
 @Composable
@@ -50,12 +47,4 @@ fun DescriptionCard (
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DescriptionCardPreview() {
-    DescriptionCard(
-        Affirmation(1, R.string.affirmation1, R.drawable.image1, R.string.description1)
-    )
 }
