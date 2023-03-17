@@ -1,6 +1,5 @@
 package com.example.affirmations.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.affirmations.R
 import com.example.affirmations.data.Datasource
@@ -32,7 +31,7 @@ class DetailViewModel : ViewModel() {
 
     fun loadAffirmation(id: Int) {
         val affirmation : Affirmation? = Datasource().loadAffirmation(id)
-        Log.i(null, affirmation.toString())
+
         if(affirmation != null)
             _uiState.update {
                 DetailUiState(
