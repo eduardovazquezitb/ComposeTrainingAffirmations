@@ -30,7 +30,7 @@ class DetailViewModel : ViewModel() {
     val uiState: StateFlow<DetailUiState> = _uiState.asStateFlow()
 
     fun loadAffirmation(id: Int) {
-        val affirmation : Affirmation? = Datasource().loadAffirmation(id)
+        val affirmation = Datasource().loadAffirmation(id)
 
         if(affirmation != null)
             _uiState.update {

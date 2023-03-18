@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
     this.setContent {
 
       val viewModel = MainViewModel()
-      viewModel.getAffirmations()
+      viewModel.getAffirmations(10)
 
       MainActivityDisplay(viewModel)
 

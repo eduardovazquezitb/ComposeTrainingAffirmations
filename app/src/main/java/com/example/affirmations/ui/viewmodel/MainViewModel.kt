@@ -4,13 +4,10 @@ import androidx.lifecycle.ViewModel
 import com.example.affirmations.data.Datasource
 import com.example.affirmations.model.MainUiState
 import com.example.affirmations.model.UiAffirmation
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class MainViewModel: ViewModel() {
     private val _uiState = MutableStateFlow(
@@ -23,19 +20,25 @@ class MainViewModel: ViewModel() {
 
     val uiState: StateFlow<MainUiState> = _uiState.asStateFlow()
 
-    fun getAffirmations() {
-        val affirmations = Datasource().loadAffirmations()
-        runBlocking {
-            launch { delay(1000) }
-        }
-        _uiState.update { currentState ->
-            currentState.copy(
-                affirmations = affirmations.mapIndexed { index, affirmation ->
-                    UiAffirmation(index, affirmation, false)
-                }.toMutableList(),
-                isLoading = false
-            )
-        }
+    fun getAffirmations(number: Int) {
+        val affirmations = Datasource().loadAffirmations(number)
+
+        if(affirmations.size == number)
+            _uiState.update { currentState ->
+                currentState.copy(
+                    affirmations = affirmations.mapIndexed { index, affirmation ->
+                        UiAffirmation(index, affirmation, false)
+                    }.toMutableList(),
+                    isLoading = false
+                )
+            }
+        else
+            _uiState.update { currentState ->
+                currentState.copy(
+                    isLoading = false,
+                    isError = true
+                )
+            }
     }
 
     fun toggleAffirmationDescription(index: Int){

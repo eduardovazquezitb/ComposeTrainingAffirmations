@@ -20,8 +20,8 @@ import com.example.affirmations.model.Affirmation
  * [Datasource] generates a list of [Affirmation]
  */
 class Datasource() {
-    fun loadAffirmations(): List<Affirmation> {
-        return listOf<Affirmation>(
+    fun loadAffirmations(number: Int): List<Affirmation> {
+        val list = listOf<Affirmation>(
             Affirmation(1, R.string.affirmation1, R.drawable.image1, R.string.description1,R.string.to1, R.string.subject1, R.string.phone1),
             Affirmation(2, R.string.affirmation2, R.drawable.image2, R.string.description2,R.string.to2, R.string.subject2, R.string.phone2),
             Affirmation(3, R.string.affirmation3, R.drawable.image3, R.string.description3,R.string.to3, R.string.subject3, R.string.phone3),
@@ -32,10 +32,16 @@ class Datasource() {
             Affirmation(8, R.string.affirmation8, R.drawable.image8, R.string.description8,R.string.to8, R.string.subject8, R.string.phone8),
             Affirmation(9, R.string.affirmation9, R.drawable.image9, R.string.description9,R.string.to9, R.string.subject9, R.string.phone9),
             Affirmation(10, R.string.affirmation10, R.drawable.image10, R.string.description10,R.string.to10, R.string.subject10, R.string.phone10),)
+
+        if(number <= list.size)
+            return list.subList(0, number)
+
+        return listOf<Affirmation>()
     }
 
     fun loadAffirmation(id: Int) : Affirmation? {
-        val affirmationList = loadAffirmations()
+
+        val affirmationList = loadAffirmations(10)
         for(i in 0 .. affirmationList.size-1){
             if(affirmationList[i].id == id)
                 return affirmationList[i]
