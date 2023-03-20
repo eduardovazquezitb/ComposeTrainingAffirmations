@@ -32,15 +32,15 @@ fun AppScaffold(
                 onThemeClick = { darkThemeState.value = ! darkThemeState.value}
             ) },
         ) { padding ->
-            if(isLoading)
-                Loadingcomponent(modifier = Modifier.padding(padding))
-            else if (isError)
-                ErrorComponent(modifier = Modifier.padding(padding))
-            else
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.secondary)
                 ) {
+                    if(isLoading)
+                        Loadingcomponent(modifier = Modifier.padding(padding))
+                    else if (isError)
+                        ErrorComponent(modifier = Modifier.padding(padding))
+                    else
                         children(modifier=Modifier.padding(padding))
                 }
         }
