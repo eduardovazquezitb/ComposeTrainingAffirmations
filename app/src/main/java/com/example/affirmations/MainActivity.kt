@@ -19,6 +19,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.example.affirmations.ui.components.*
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.affirmations.ui.viewmodel.MainViewModel
 
 class MainActivity : ComponentActivity() {
@@ -26,7 +27,7 @@ class MainActivity : ComponentActivity() {
     super.onCreate(savedInstanceState)
     this.setContent {
 
-      val viewModel = MainViewModel()
+      val viewModel : MainViewModel = viewModel()
       viewModel.getAffirmations(10)
 
       MainActivityDisplay(viewModel)
